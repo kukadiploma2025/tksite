@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://kukandrio.kz/sitemap.xml

@@ -1,0 +1,1381 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>KUKANDRIO — Куаныш Тлепберген</title>
+
+<meta name="description"
+content="Куаныш Тлепберген — KUKANDRIO, блогер, автор уличных опросов и creator из Астаны, Казахстан.">
+
+<meta name="author" content="Куаныш Тлепберген">
+
+<meta name="keywords"
+content="Куаныш Тлепберген, KUKANDRIO, Куаныш Тлепберген Астана, KUKANDRIO Астана, Тлепберген Куаныш, блогер Астана, KUKANDRIO блогер, опросы Астана">
+
+<meta name="robots"
+content="index,follow,max-image-preview:large">
+
+<link rel="canonical" href="https://kukandrio.kz/">
+
+<meta property="og:title"
+content="Куаныш Тлепберген — KUKANDRIO">
+
+<meta property="og:description"
+content="Блогер, автор уличных опросов и creator из Астаны, Казахстан.">
+
+<meta property="og:type" content="profile">
+
+<meta property="og:locale" content="ru_RU">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfilePage",
+  "url": "https://kukandrio.kz/",
+  "name": "Куаныш Тлепберген — KUKANDRIO",
+
+  "mainEntity": {
+    "@type": "Person",
+
+    "name": "Куаныш Тлепберген",
+
+    "alternateName": [
+      "KUKANDRIO",
+      "Тлепберген Куаныш"
+    ],
+
+    "description":
+      "Блогер, автор уличных опросов и creator из Астаны, Казахстан.",
+
+    "jobTitle":
+      "Блогер · Опросник · Creator",
+
+    "url":
+      "https://kukandrio.kz/",
+
+    "homeLocation": {
+      "@type": "City",
+      "name": "Астана"
+    },
+
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Астана",
+      "addressCountry": "KZ"
+    },
+
+    "sameAs": [
+      "https://www.instagram.com/kukandrio/",
+      "https://www.tiktok.com/@kukandrio_",
+      "https://www.youtube.com/kukandrio"
+    ]
+  }
+}
+</script>
+
+<style>
+
+:root {
+    --project-card-min-height: 230px;
+}
+
+:root {
+    color-scheme: light dark;
+
+    --bg: light-dark(#f4f3ef,#111214);
+    --surface: light-dark(#fff,#1b1d20);
+    --text: light-dark(#151515,#f5f5f5);
+    --muted: light-dark(#6c6c6c,#aaa);
+    --line: light-dark(#deddd8,#34363a);
+
+    --accent: #c8ff3d;
+    --ink: #10110d;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: Inter, Arial, sans-serif;
+}
+
+.root {
+    min-height: 100vh;
+    width: 100%;
+    background: var(--bg);
+    overflow: hidden;
+}
+
+/* NAV */
+
+nav {
+    max-width: 1180px;
+    margin: auto;
+    padding: 24px 28px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+.logo {
+    font-weight: 950;
+    letter-spacing: -.08em;
+    font-size: 22px;
+    color: #111;
+}
+
+.logo span {
+    color: #91c900;
+}
+
+.navlinks {
+    display: flex;
+    gap: clamp(12px,2vw,25px);
+
+    font-size: 13px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.navlinks a:hover {
+    opacity: .6;
+}
+
+.pill {
+    background: var(--accent);
+    color: var(--ink);
+
+    border: 0;
+
+    padding: 12px 17px;
+
+    border-radius: 99px;
+
+    font-size: 12px;
+    font-weight: 900;
+
+    cursor: pointer;
+}
+
+/* HERO */
+
+.hero {
+    max-width: 1180px;
+    margin: auto;
+
+    padding: 54px 28px 80px;
+
+    display: grid;
+    grid-template-columns:
+        minmax(0,1.15fr)
+        minmax(320px,.85fr);
+
+    align-items: center;
+
+    gap: 35px;
+}
+
+.eyebrow {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    text-transform: uppercase;
+
+    font-size: 11px;
+
+    letter-spacing: .16em;
+
+    font-weight: 800;
+
+    color: var(--muted);
+}
+
+.dot {
+    width: 8px;
+    height: 8px;
+
+    border-radius: 50%;
+
+    background: #9bd400;
+
+    box-shadow:
+        0 0 0 5px #9bd40022;
+}
+
+h1 {
+    font-size: clamp(62px,10vw,130px);
+
+    line-height: .83;
+
+    letter-spacing: -.095em;
+
+    margin: 24px 0;
+
+    font-weight: 950;
+}
+
+h1 span {
+    color: #9bd400;
+}
+
+.lead {
+    font-size: clamp(16px,2vw,20px);
+
+    line-height: 1.55;
+
+    color: var(--muted);
+
+    max-width: 520px;
+}
+
+.actions {
+    display: flex;
+
+    gap: 12px;
+
+    flex-wrap: wrap;
+
+    margin-top: 30px;
+}
+
+.secondary {
+    border: 1px solid var(--line);
+
+    border-radius: 99px;
+
+    padding: 12px 17px;
+
+    font-size: 12px;
+
+    font-weight: 800;
+}
+
+/* HERO VISUAL */
+
+.visual {
+    min-height: 440px;
+
+    position: relative;
+
+    border-radius: 28px;
+
+    overflow: hidden;
+
+    background:
+        linear-gradient(
+            145deg,
+            #d5ff61,
+            #91bd20 48%,
+            #263b09
+        );
+
+    color: #10110d;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+}
+
+.visual:before {
+    content: "";
+
+    position: absolute;
+
+    width: 310px;
+    height: 310px;
+
+    border: 1px solid #10110d33;
+
+    border-radius: 50%;
+}
+
+.visual:after {
+    content: "";
+
+    position: absolute;
+
+    width: 230px;
+    height: 230px;
+
+    border: 1px solid #10110d44;
+
+    border-radius: 50%;
+}
+
+.orbit {
+    position: absolute;
+
+    width: 390px;
+    height: 160px;
+
+    border: 1px solid #10110d55;
+
+    border-radius: 50%;
+
+    transform: rotate(-35deg);
+}
+
+.bigmark {
+    font-size: clamp(54px,8vw,94px);
+
+    font-weight: 1000;
+
+    letter-spacing: -.11em;
+
+    transform: rotate(-8deg);
+
+    z-index: 1;
+
+    text-shadow:
+        5px 5px 0 #10110d12;
+}
+
+.sticker {
+    position: absolute;
+
+    z-index: 2;
+
+    right: 24px;
+    bottom: 25px;
+
+    background: #10110d;
+
+    color: #f5f5f5;
+
+    border-radius: 50%;
+
+    width: 100px;
+    height: 100px;
+
+    display: grid;
+
+    place-items: center;
+
+    text-align: center;
+
+    font-size: 10px;
+
+    line-height: 1.3;
+
+    font-weight: 900;
+
+    transform: rotate(12deg);
+}
+
+/* SECTIONS */
+
+section {
+    max-width: 1180px;
+
+    margin: auto;
+
+    padding: 45px 28px 78px;
+}
+
+.sectionhead {
+    display: flex;
+
+    align-items: end;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    margin-bottom: 26px;
+}
+
+h2 {
+    font-size: clamp(32px,5vw,54px);
+
+    letter-spacing: -.07em;
+
+    line-height: .95;
+
+    margin: 0;
+}
+
+.kicker {
+    font-size: 11px;
+
+    color: var(--muted);
+
+    letter-spacing: .14em;
+
+    text-transform: uppercase;
+
+    font-weight: 800;
+}
+
+/* CARDS */
+
+.cards {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3,minmax(0,1fr));
+
+    gap: 14px;
+}
+
+.card {
+    background: var(--surface);
+
+    border: 1px solid var(--line);
+
+    border-radius: 20px;
+
+    padding: 22px;
+
+    min-height:
+        var(--project-card-min-height);
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: space-between;
+}
+
+.cardnum {
+    color: #8fc500;
+
+    font-size: 12px;
+
+    font-weight: 900;
+}
+
+.card h3 {
+    font-size: 23px;
+
+    letter-spacing: -.05em;
+
+    margin: 25px 0 8px;
+}
+
+.card p {
+    color: var(--muted);
+
+    font-size: 13px;
+
+    line-height: 1.5;
+
+    margin: 0 0 8px;
+}
+
+/* ABOUT */
+
+.about {
+    display: grid;
+
+    grid-template-columns:
+        minmax(0,.8fr)
+        minmax(0,1.2fr);
+
+    gap: 40px;
+
+    align-items: start;
+
+    border-top: 1px solid var(--line);
+}
+
+.aboutcopy {
+    font-size: clamp(20px,3vw,32px);
+
+    line-height: 1.25;
+
+    letter-spacing: -.04em;
+}
+
+.aboutcopy strong {
+    background: var(--accent);
+
+    color: var(--ink);
+
+    padding: 0 5px;
+
+    border-radius: 4px;
+}
+
+.socials {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 10px;
+
+    margin-top: 24px;
+}
+
+.socials a {
+    border: 1px solid var(--line);
+
+    padding: 13px 17px;
+
+    border-radius: 99px;
+
+    font-size: 12px;
+
+    font-weight: 800;
+}
+
+/* CONTACT */
+
+.contact {
+    background: var(--accent);
+
+    color: var(--ink);
+
+    border-radius: 26px;
+
+    padding: 36px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 20px;
+}
+
+.contact h2 {
+    max-width: 600px;
+}
+
+.contact .pill {
+    background: #10110d;
+
+    color: #fff;
+
+    white-space: nowrap;
+}
+
+/* FOOTER */
+
+footer {
+    max-width: 1180px;
+
+    margin: auto;
+
+    padding: 25px 28px 35px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    gap: 15px;
+
+    color: var(--muted);
+
+    font-size: 11px;
+
+    border-top: 1px solid var(--line);
+}
+
+/* TABLET */
+
+@media(max-width:1000px) {
+
+    nav {
+        padding: 20px 24px;
+    }
+
+    .navlinks {
+        gap: 14px;
+        font-size: 11px;
+    }
+
+    .hero {
+        grid-template-columns: 1fr 1fr;
+
+        gap: 24px;
+
+        padding:
+            44px 24px 65px;
+    }
+
+    .visual {
+        min-height: 380px;
+    }
+
+    section {
+        padding-left: 24px;
+        padding-right: 24px;
+    }
+}
+
+/* MOBILE */
+
+@media(max-width:760px) {
+
+    nav {
+        padding: 18px 20px;
+    }
+
+    .logo {
+        font-size: 20px;
+    }
+
+    .navlinks {
+        display: none;
+    }
+
+    nav > .pill {
+        padding: 10px 14px;
+    }
+
+    .hero {
+        grid-template-columns: 1fr;
+
+        padding:
+            38px 20px 52px;
+
+        gap: 30px;
+    }
+
+    h1 {
+        font-size:
+            clamp(58px,18vw,92px);
+    }
+
+    .lead {
+        font-size: 16px;
+    }
+
+    .actions {
+        gap: 9px;
+    }
+
+    .actions .pill,
+    .secondary {
+        padding: 11px 14px;
+    }
+
+    .visual {
+        min-height: 310px;
+
+        border-radius: 22px;
+    }
+
+    .orbit {
+        width: 300px;
+        height: 125px;
+    }
+
+    .visual:before {
+        width: 240px;
+        height: 240px;
+    }
+
+    .visual:after {
+        width: 180px;
+        height: 180px;
+    }
+
+    .bigmark {
+        font-size:
+            clamp(48px,15vw,72px);
+    }
+
+    .sticker {
+        width: 78px;
+        height: 78px;
+
+        right: 16px;
+        bottom: 16px;
+
+        font-size: 8px;
+    }
+
+    .cards {
+        grid-template-columns: 1fr;
+    }
+
+    .card {
+        min-height: 150px;
+        padding: 20px;
+    }
+
+    section {
+        padding:
+            38px 20px 58px;
+    }
+
+    .sectionhead {
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        gap: 10px;
+    }
+
+    h2 {
+        font-size:
+            clamp(32px,10vw,48px);
+    }
+
+    .about {
+        grid-template-columns: 1fr;
+
+        gap: 18px;
+    }
+
+    .aboutcopy {
+        font-size:
+            clamp(20px,6vw,28px);
+    }
+
+    .contact {
+        padding: 25px;
+
+        align-items: flex-start;
+
+        flex-direction: column;
+    }
+
+    .contact .pill {
+        white-space: normal;
+    }
+
+    footer {
+        padding:
+            22px 20px;
+
+        flex-direction: column;
+    }
+}
+
+/* SMALL MOBILE */
+
+@media(max-width:380px) {
+
+    nav > .pill {
+        font-size: 10px;
+
+        padding:
+            9px 11px;
+    }
+
+    .logo {
+        font-size: 18px;
+    }
+
+    .hero {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    section {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    .actions {
+        width: 100%;
+    }
+
+    .actions a {
+        width: 100%;
+
+        text-align: center;
+    }
+
+    .visual {
+        min-height: 270px;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="root">
+
+<nav>
+
+<a class="logo" href="#top">
+KUK<span>ANDRIO</span>
+</a>
+
+<div class="navlinks">
+
+<a href="#about">ОБО МНЕ</a>
+<a href="#content">КОНТЕНТ</a>
+<a href="#projects">ПРОЕКТЫ</a>
+<a href="#shop">МАГАЗИН</a>
+<a href="#contact">СОТРУДНИЧЕСТВО</a>
+
+</div>
+
+<a class="pill" href="#contact">
+СВЯЗАТЬСЯ ↗
+</a>
+
+</nav>
+
+
+<main id="top">
+
+
+<!-- HERO -->
+
+<div class="hero">
+
+<div>
+
+<div class="eyebrow">
+
+<i class="dot"></i>
+
+БЛОГЕР · АВТОР · CREATOR
+
+</div>
+
+<h1>
+KUK<br>
+<span>ANDRIO</span>
+</h1>
+
+<p class="lead">
+
+Создаю контент, делюсь моментами
+и превращаю идеи в проекты.
+Добро пожаловать в мой цифровой мир.
+
+</p>
+
+<div class="actions">
+
+<a class="pill" href="#content">
+СМОТРЕТЬ КОНТЕНТ ↗
+</a>
+
+<a class="secondary" href="#about">
+УЗНАТЬ ОБО МНЕ ↓
+</a>
+
+</div>
+
+</div>
+
+
+<div class="visual">
+
+<div class="orbit"></div>
+
+<div class="bigmark">
+KUK<br>
+ANDRIO
+</div>
+
+<div class="sticker">
+REAL LIFE<br>
+NO FILTER<br>
+✳
+</div>
+
+</div>
+
+</div>
+
+
+<!-- CONTENT -->
+
+<section id="content">
+
+<div class="sectionhead">
+
+<div>
+
+<div class="kicker">
+01 / ЧТО Я ДЕЛАЮ
+</div>
+
+<h2>
+Мой контент
+</h2>
+
+</div>
+
+<div class="kicker">
+IDEAS → STORIES
+</div>
+
+</div>
+
+
+<div class="cards">
+
+
+<article class="card">
+
+<div class="cardnum">
+01 — SOCIAL
+</div>
+
+<div>
+
+<h3>
+Блог и лайфстайл
+</h3>
+
+<p>
+Повседневная жизнь, личные истории,
+впечатления и моменты.
+</p>
+
+</div>
+
+</article>
+
+
+<article class="card">
+
+<div class="cardnum">
+02 — STREET INTERVIEWS
+</div>
+
+<div>
+
+<h3>
+Опросы и интервью
+</h3>
+
+<p>
+Уличные опросы, вопросы прохожим
+и живые мнения людей на разные темы.
+</p>
+
+</div>
+
+</article>
+
+
+<article class="card">
+
+<div class="cardnum">
+03 — CREATIVE
+</div>
+
+<div>
+
+<h3>
+Видео и творчество
+</h3>
+
+<p>
+Съёмка, монтаж и визуальные эксперименты.
+</p>
+
+</div>
+
+</article>
+
+
+</div>
+
+</section>
+
+
+<!-- PROJECTS -->
+
+<section id="projects">
+
+<div class="sectionhead">
+
+<div>
+
+<div class="kicker">
+02 / МОИ ПРОЕКТЫ
+</div>
+
+<h2>
+Идеи в действии
+</h2>
+
+</div>
+
+<div class="kicker">
+BUILDING THINGS
+</div>
+
+</div>
+
+
+<div class="cards">
+
+
+<article class="card">
+
+<div class="cardnum">
+01 — OUTDOOR / ASTANA
+</div>
+
+<div>
+
+<h3>
+SUP CLUB ASTANA
+</h3>
+
+<p>
+SUP-туры по Астане,
+прогулки по воде и впечатления,
+которыми хочется делиться.
+</p>
+
+<p>
+
+<a
+href="https://www.instagram.com/sup.club.astana/"
+target="_blank"
+rel="noopener">
+
+Instagram проекта ↗
+
+</a>
+
+</p>
+
+</div>
+
+</article>
+
+
+<article class="card">
+
+<div class="cardnum">
+02 — SMART HOME
+</div>
+
+<div>
+
+<h3>
+SMART KUKA
+</h3>
+
+<p>
+Мой проект умного дома:
+интерфейс управления
+и мониторинг устройств.
+</p>
+
+</div>
+
+</article>
+
+
+<article class="card">
+
+<div class="cardnum">
+03 — MEDIA / ASTANA
+</div>
+
+<div>
+
+<h3>
+GOLOSA ASTANY
+</h3>
+
+<p>
+Медиа-проект с уличными опросами
+и живыми мнениями жителей Астаны.
+Создатель проекта — Куаныш Тлепберген.
+</p>
+
+<p>
+
+<a
+href="https://www.instagram.com/golosa.astany/"
+target="_blank"
+rel="noopener">
+
+Instagram проекта ↗
+
+</a>
+
+</p>
+
+</div>
+
+</article>
+
+
+<article class="card">
+
+<div class="cardnum">
+04 — CREATOR
+</div>
+
+<div>
+
+<h3>
+Медиа и контент
+</h3>
+
+<p>
+Развиваю собственные форматы видео,
+опросов и творческих экспериментов.
+</p>
+
+</div>
+
+</article>
+
+
+</div>
+
+</section>
+
+
+<!-- ABOUT -->
+
+<section
+class="about"
+id="about">
+
+<div>
+
+<div class="kicker">
+03 / ОБО МНЕ
+</div>
+
+<h2>
+Приятно<br>
+познакомиться.
+</h2>
+
+</div>
+
+
+<div>
+
+<p class="aboutcopy">
+
+Я —
+<strong>Куаныш Тлепберген</strong>.
+Блогер и создатель проектов
+из Астаны.
+
+Здесь собраны мои работы,
+идеи и то, чем я живу.
+
+</p>
+
+
+<div class="socials">
+
+<a
+href="https://www.tiktok.com/@kukandrio_"
+target="_blank"
+rel="noopener">
+
+TikTok ↗
+
+</a>
+
+<a
+href="https://www.instagram.com/kukandrio/"
+target="_blank"
+rel="noopener">
+
+Instagram ↗
+
+</a>
+
+<a
+href="https://www.youtube.com/kukandrio"
+target="_blank"
+rel="noopener">
+
+YouTube ↗
+
+</a>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- CONTACT -->
+
+<section id="contact">
+
+<div class="contact">
+
+<div>
+
+<div
+class="kicker"
+style="color:#33440b">
+
+04 / COLLABORATION
+
+</div>
+
+<h2>
+Есть идея?
+Давай обсудим.
+</h2>
+
+<p>
+Открыт к интересным проектам
+и сотрудничеству.
+</p>
+
+</div>
+
+
+<a
+class="pill"
+href="mailto:hello@kuakandrio.kz">
+
+НАПИСАТЬ МНЕ ↗
+
+</a>
+
+</div>
+
+</section>
+
+
+<!-- STORE -->
+
+<section id="shop">
+
+<div class="sectionhead">
+
+<div>
+
+<div class="kicker">
+05 / STORE
+</div>
+
+<h2>
+Магазин
+</h2>
+
+</div>
+
+<div class="kicker">
+COMING SOON
+</div>
+
+</div>
+
+
+<div class="card">
+
+<h3>
+Магазин пока пуст
+</h3>
+
+<p>
+Здесь появятся мерч,
+лимитированные вещи
+и другие товары KUKANDRIO.
+Скоро.
+</p>
+
+</div>
+
+</section>
+
+
+<!-- PRIVACY -->
+
+<section id="deletion">
+
+<div class="sectionhead">
+
+<div>
+
+<div class="kicker">
+05 / ACCOUNT & PRIVACY
+</div>
+
+<h2>
+Запрос на удаление
+</h2>
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<h3>
+Удаление данных
+</h3>
+
+<p>
+Если вы хотите запросить удаление
+персональных данных, связанных
+с моими проектами или контентом,
+напишите мне в Telegram.
+</p>
+
+
+<div class="actions">
+
+<a
+class="pill"
+href="https://t.me/kukandrio"
+target="_blank"
+rel="noopener">
+
+НАПИСАТЬ В TELEGRAM ↗
+
+</a>
+
+</div>
+
+</div>
+
+</section>
+
+
+</main>
+
+
+<footer>
+
+<span>
+© 2026 KUKANDRIO
+</span>
+
+<span>
+PERSONAL WEBSITE · ASTANA, KZ
+</span>
+
+</footer>
+
+</div>
+
+</body>
+</html>
