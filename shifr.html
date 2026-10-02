@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Шифр замены — №1 и №2</title>
+<style>
+:root{--bg:#f4f6f8;--card:#fff;--text:#17202a;--muted:#68727d;--accent:#2563eb;--border:#d9dee5;--danger:#b42318}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif}
+.container{max-width:1100px;margin:auto;padding:24px 16px 50px}
+h1{margin:0 0 8px;font-size:30px}
+h2{font-size:20px;margin:0 0 14px}
+p{color:var(--muted)}
+.card{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:20px;margin-top:16px;box-shadow:0 4px 18px #00000008}
+.controls{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+select,button,textarea{font:inherit}
+select,button{border:1px solid var(--border);border-radius:10px;padding:10px 14px;background:white}
+button{cursor:pointer;font-weight:600}
+button.primary{background:var(--accent);color:#fff;border-color:var(--accent)}
+button.secondary{background:#eef2f7}
+textarea{width:100%;min-height:145px;resize:vertical;border:1px solid var(--border);border-radius:12px;padding:14px;outline:none}
+textarea:focus,select:focus{border-color:var(--accent)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.result{margin-top:12px;padding:14px;background:#f7f9fb;border:1px dashed var(--border);border-radius:12px;white-space:pre-wrap;word-break:break-word;min-height:55px}
+.table-wrap{overflow:auto;border:1px solid var(--border);border-radius:12px}
+table{border-collapse:collapse;width:100%;min-width:700px}
+th,td{border-bottom:1px solid var(--border);padding:8px 10px;text-align:center}
+th{background:#f1f4f8}
+td:first-child{text-align:left;font-weight:600}
+code{background:#eef2f7;padding:2px 5px;border-radius:5px}
+.solution{background:#f7f9fb;border-radius:12px;padding:14px;line-height:1.7}
+.warning{color:var(--danger);font-size:14px}
+@media(max-width:750px){.grid{grid-template-columns:1fr}h1{font-size:25px}.card{padding:15px}}
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>Шифр замены</h1>
+  <p>Шифратор и дешифратор по таблице из задания. Работает прямо в браузере, без сервера.</p>
+
+  <div class="card">
+    <h2>Шифратор / дешифратор</h2>
+    <div class="controls">
+      <label>Шифр:
+        <select id="cipher">
+          <option value="1">№1</option>
+          <option value="2">№2</option>
+        </select>
+      </label>
+      <label>Режим:
+        <select id="mode">
+          <option value="encrypt">Зашифровать</option>
+          <option value="decrypt">Расшифровать</option>
+        </select>
+      </label>
+      <button class="primary" onclick="processText()">Выполнить</button>
+      <button class="secondary" onclick="swapText()">↕ Поменять местами</button>
+      <button class="secondary" onclick="clearText()">Очистить</button>
+    </div>
+
+    <div class="grid" style="margin-top:16px">
+      <div>
+        <label><b>Исходный текст</b></label>
+        <textarea id="input" placeholder="Введите текст..."></textarea>
+      </div>
+      <div>
+        <label><b>Результат</b></label>
+        <textarea id="output" readonly placeholder="Здесь появится результат"></textarea>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Готовые ответы из задания</h2>
+    <div class="solution">
+      <b>Шифр №1:</b><br>
+      И.РЮУ.ЪФОБГНО → <b>БОЛЬШОЙ ВЗРЫВ</b><br>
+      СЛХГ.ЪЛХО.ФОО.ЩВ → <b>УСТРОЙСТВО ВВОДА</b>
+      <br><br>
+      <b>Шифр №2:</b><br>
+      ▽*! (∞♦№>#⊕ → <b>ШИФР ЗМЕНЫ</b><br>
+      @♠−♡∞▽*! (−)#*Δ → <b>БЛОК ШИФРОВНИЯ</b>
+      <p class="warning">В исходной таблице/условии некоторые символы выглядят неоднозначно, а сами строки №2 содержат, вероятно, пропущенные буквы. Ниже используется именно таблица, считанная с изображения.</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Задание №3</h2>
+    <p>Можно сразу вставить слова и зашифровать их выбранным шифром.</p>
+    <div class="actions">
+      <button onclick="setAndEncrypt('Университет')">Университет</button>
+      <button onclick="setAndEncrypt('школьный автобус')">школьный автобус</button>
+      <button onclick="setAndEncrypt('клавиатура')">клавиатура</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Таблица замены</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Открытый текст</th><th>Шифр №1</th><th>Шифр №2</th></tr></thead>
+        <tbody id="tableBody"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<script>
+/*
+  Таблица из изображения задания.
+  В таблице отсутствует отдельная строка для "Й" в некоторых местах,
+  но по контрольной фразе №1 видно, что Й → Ъ.
+*/
+const map1 = {
+  "А":"В","Б":"И","В":"О","Г":"А","Д":"Щ","Е":"П","Ж":"К","З":"Б","И":"Ь","Й":"Ъ","К":" ","Л":"Р",
+  "М":"Т","Н":"Ц","О":".","П":"Ж","Р":"Г","С":"Л","Т":"Х","У":"С","Ф":"Ь","Х":"Ч","Ц":"З",
+  "Ч":"М","Ш":"У","Щ":"Д","Ъ":"Э","Ы":"Н","Ь":"Ю","Э":"Ы","Ю":"Ш","Я":"Е"," ": "Ф",".":"Я"
+};
+
+const map2 = {
+  "А":"^","Б":"@","В":")","Г":"+","Д":"<","Е":">","Ж":"∀","З":"♦","И":"*","Й":"Ж","К":"♥","Л":"♠",
+  "М":"№","Н":"#","О":"-","П":"=","Р":"(","С":"?","Т":"%","У":"⊗","Ф":"!","Х":"№","Ц":"®",
+  "Ч":"Σ","Ш":"▽","Щ":"Γ","Ъ":"Ж","Ы":"⊕","Ь":"×","Э":"φ","Ю":"$","Я":"Δ"," ":"∞",".":"♣"
+};
+
+function makeReverse(map){
+  const reverse = {};
+  for(const [plain,cipher] of Object.entries(map)){
+    if(reverse[cipher] === undefined) reverse[cipher] = plain;
+  }
+  return reverse;
+}
+
+function processText(){
+  const cipher = document.getElementById("cipher").value;
+  const mode = document.getElementById("mode").value;
+  const input = document.getElementById("input").value;
+  const map = cipher === "1" ? map1 : map2;
+  const table = mode === "encrypt" ? map : makeReverse(map);
+
+  let out = "";
+  for(const ch of input){
+    const upper = ch.toUpperCase();
+    if(table[upper] !== undefined){
+      let r = table[upper];
+      // Сохраняем регистр для русских букв при расшифровке.
+      if(ch !== upper && /^[А-ЯЁ]$/.test(r)) r = r.toLowerCase();
+      out += r;
+    }else{
+      out += ch;
+    }
+  }
+  document.getElementById("output").value = out;
+}
+
+function swapText(){
+  const a=document.getElementById("input"), b=document.getElementById("output");
+  [a.value,b.value]=[b.value,a.value];
+}
+
+function clearText(){
+  document.getElementById("input").value="";
+  document.getElementById("output").value="";
+}
+
+function setAndEncrypt(text){
+  document.getElementById("mode").value="encrypt";
+  document.getElementById("input").value=text;
+  processText();
+}
+
+const rows = ["А","Б","В","Г","Д","Е","Ж","З","И","Й","К","Л","М","Н","О","П","Р","С","Т","У","Ф","Х","Ц","Ч","Ш","Щ","Ъ","Ы","Ь","Э","Ю","Я"," ","."];
+const body=document.getElementById("tableBody");
+for(const ch of rows){
+  const tr=document.createElement("tr");
+  const name=ch===" "?"пробел":ch;
+  tr.innerHTML=`<td>${name}</td><td>${map1[ch] ?? ""}</td><td>${map2[ch] ?? ""}</td>`;
+  body.appendChild(tr);
+}
+</script>
+</body>
+</html>
