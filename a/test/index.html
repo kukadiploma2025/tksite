@@ -20,18 +20,45 @@ button,select{background:var(--panel);color:var(--text);border:1px solid var(--l
 .answer{margin:13px 0 0 40px;color:#d7ddd8;white-space:pre-wrap}.answer strong{color:var(--accent)}.empty{padding:28px;text-align:center;border:1px dashed var(--line);border-radius:12px;color:var(--muted)}
 footer{border-top:1px solid var(--line);padding:22px 0 35px;color:var(--muted);font-size:12px}
 @media(max-width:600px){main{padding-top:34px}.item{padding:14px}.item-top{flex-wrap:wrap}.category{margin-left:40px}.answer{margin-left:0}.top{align-items:flex-start;padding:16px 0;flex-direction:column}}
+
+.tabs{display:flex;gap:8px;margin:22px 0}
+.tabs button{flex:1}
+[hidden]{display:none!important}
+.quiz-card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:22px}
+.quiz-number{font-size:12px;color:var(--accent);font-weight:800;letter-spacing:1px}
+.quiz-question{font-size:21px;font-weight:750;line-height:1.35;margin:10px 0 18px}
+.option{display:flex;align-items:flex-start;gap:11px;padding:13px;margin-top:9px;border:1px solid var(--line);border-radius:10px;cursor:pointer}
+.option:hover{border-color:var(--accent)}
+.option input{margin-top:4px;accent-color:#b5f34d}
+.option span{flex:1}
+.quiz-actions{display:flex;justify-content:space-between;gap:10px;margin-top:14px}
+.quiz-actions button{min-width:110px}
+.result-score{font-size:30px;color:var(--accent);font-weight:900;margin:8px 0}
+.review{padding:14px 0;border-bottom:1px solid var(--line)}
+.review-title{font-weight:750;margin-bottom:7px}
+.review-good{color:#b5f34d}.review-bad{color:#ff9c9c}
+
 </style>
 </head>
 <body>
 <div class="wrap">
 <header class="top"><a class="logo" href="/"><span>K</span>UKANDRIO</a><span class="tag">ТЕСТОВАЯ БАЗА · 40 ВОПРОСОВ</span></header>
 <main>
-<div class="eyebrow">Проверка поиска</div>
+<div class="eyebrow">Тренажёр и база вопросов</div>
 <h1>Криптография</h1>
-<p class="sub">40 учебных вопросов и ответов для проверки поиска, ранжирования совпадений и отображения ответов. Это учебный материал, не руководство по атаке на реальные системы.</p>
-<div class="search"><input id="q" type="search" placeholder="Например: AES, хеширование, RSA, цифровая подпись…" autocomplete="off"><button class="primary" id="clear">Очистить</button></div>
-<div class="toolbar"><span class="muted" id="count" aria-live="polite">Загрузка вопросов…</span><select id="category" aria-label="Фильтр по теме"><option value="">Все темы</option><option>Основы</option><option>Шифрование</option><option>Хеширование</option><option>Ключи и подписи</option><option>Сеть и безопасность</option><option>Криптовалюты</option></select></div>
-<section class="list" id="list"></section>
+<p class="sub">40 учебных вопросов в базе и отдельный тестовый режим с вариантами ответов. В режиме теста правильные ответы показываются только после завершения.</p>
+<div class="tabs"><button class="primary" id="tabBank">База вопросов</button><button id="tabQuiz">Пройти тест</button></div>
+<div id="databaseView">
+  <div class="search"><input id="q" type="search" placeholder="Например: AES, хеширование, RSA, цифровая подпись…" autocomplete="off"><button class="primary" id="clear">Очистить</button></div>
+  <div class="toolbar"><span class="muted" id="count" aria-live="polite">Загрузка вопросов…</span><select id="category" aria-label="Фильтр по теме"><option value="">Все темы</option><option>Основы</option><option>Шифрование</option><option>Хеширование</option><option>Ключи и подписи</option><option>Сеть и безопасность</option><option>Криптовалюты</option></select></div>
+  <section class="list" id="list"></section>
+</div>
+<div id="quizView" hidden>
+  <div class="toolbar"><span class="muted" id="quizProgress">Вопрос 1 из 10</span><button id="restartQuiz">Начать заново</button></div>
+  <div class="quiz-card" id="quizCard"></div>
+  <div class="quiz-actions"><button id="prevQuestion">Назад</button><button class="primary" id="nextQuestion">Следующий вопрос</button></div>
+  <div id="quizResult" hidden></div>
+</div>
 </main>
 <footer>Тестовая страница KUKANDRIO · Материал предназначен для обучения и проверки работы поиска.</footer>
 </div>
@@ -80,6 +107,88 @@ const questions = [
 {c:"Криптовалюты",q:"Что такое seed-фраза?",a:"Набор слов, из которого кошелёк может восстановить ключевой материал. Любой, кто получает seed-фразу, потенциально может получить контроль над средствами."},
 {c:"Криптовалюты",q:"Почему хеширование важно для блокчейна?",a:"Хеши связывают данные блоков и помогают обнаруживать изменения; подписи и правила консенсуса выполняют другие важные функции."}
 ];
+
+
+const quizQuestions = [
+{q:"Какой алгоритм является симметричным блочным шифром?",o:["RSA","AES","SHA-256","HMAC"],a:1,e:"AES — симметричный блочный шифр с размером блока 128 бит."},
+{q:"Какова основная функция криптографической хеш-функции?",o:["Восстановление исходного сообщения","Создание дайджеста фиксированного размера","Обмен секретными ключами","Сжатие файла с полным восстановлением"],a:1,e:"Хеш-функция преобразует данные произвольной длины в значение фиксированного размера."},
+{q:"Какой ключ должен оставаться в секрете при использовании цифровой подписи?",o:["Открытый ключ получателя","Публичный ключ подписанта","Закрытый ключ подписанта","Сертификат сервера"],a:2,e:"Подпись создают с помощью закрытого ключа; публичный ключ используют для проверки."},
+{q:"Для чего предназначена соль при хранении паролей?",o:["Чтобы каждый пароль имел уникальные дополнительные случайные данные","Чтобы пароль можно было расшифровать обратно","Чтобы заменить пароль публичным ключом","Чтобы уменьшить энтропию пароля"],a:0,e:"Уникальная соль затрудняет применение заранее вычисленных таблиц и сопоставление одинаковых паролей по хешам."},
+{q:"Что обеспечивает HTTPS при корректной настройке TLS и проверке сертификата?",o:["Полную анонимность пользователя","Шифрование канала, целостность данных и аутентификацию сервера","Защиту устройства от любого вредоносного ПО","Автоматическое создание резервных копий"],a:1,e:"TLS защищает передаваемые данные и позволяет клиенту проверить подлинность сервера."},
+{q:"Какое утверждение о RSA является наиболее точным?",o:["Это хеш-функция с выходом 256 бит","Это потоковый симметричный шифр","Это асимметричный алгоритм, связанный с факторизацией больших чисел","Это протокол сетевой анонимности"],a:2,e:"RSA — асимметричный алгоритм; его безопасность при корректной настройке связана с трудностью факторизации."},
+{q:"Что может произойти при повторном использовании nonce с одним и тем же ключом в AES-GCM?",o:["Ключ автоматически становится длиннее","Могут нарушиться гарантии конфиденциальности и целостности","Алгоритм превращается в SHA-256","Сообщения всегда становятся нечитаемыми даже с ключом"],a:1,e:"Повтор nonce с тем же ключом в AES-GCM может серьёзно скомпрометировать защиту."},
+{q:"Какие утверждения о защите паролей верны?",multi:true,o:["Для хранения подходят Argon2id, scrypt или bcrypt","Для каждого пароля следует использовать уникальную соль","Обычный SHA-256 без дополнительных мер всегда лучший выбор","Соль обязательно должна быть секретной"],a:[0,1],e:"Специализированные функции замедляют перебор; соль уникальна для каждого пароля и обычно не является секретом."},
+{q:"Цифровая подпись и шифрование решают одну и ту же задачу: оба механизма сами по себе скрывают содержимое сообщения от посторонних.",tf:true,o:["Верно","Неверно"],a:1,e:"Шифрование скрывает содержимое, а цифровая подпись помогает проверять происхождение и целостность данных."},
+{q:"Обмен ключами Диффи — Хеллмана сам по себе гарантирует, что собеседник действительно является тем, за кого себя выдаёт.",tf:true,o:["Верно","Неверно"],a:1,e:"Сам по себе Диффи — Хеллман не подтверждает личность второй стороны; нужна отдельная аутентификация."}
+];
+let quizIndex=0, quizAnswers=Array(quizQuestions.length).fill(null), quizFinished=false;
+const quizView=document.getElementById("quizView"), databaseView=document.getElementById("databaseView");
+function setMode(mode){
+  const quiz=mode==="quiz";
+  quizView.hidden=!quiz;databaseView.hidden=quiz;
+  document.getElementById("tabQuiz").classList.toggle("primary",quiz);
+  document.getElementById("tabBank").classList.toggle("primary",!quiz);
+  if(quiz) renderQuiz();
+}
+document.getElementById("tabBank").addEventListener("click",()=>setMode("bank"));
+document.getElementById("tabQuiz").addEventListener("click",()=>setMode("quiz"));
+function renderQuiz(){
+  const item=quizQuestions[quizIndex], card=document.getElementById("quizCard");
+  document.getElementById("quizProgress").textContent=quizFinished?"Тест завершён":("Вопрос "+(quizIndex+1)+" из "+quizQuestions.length);
+  document.getElementById("quizResult").hidden=!quizFinished;
+  document.getElementById("prevQuestion").disabled=quizIndex===0||quizFinished;
+  document.getElementById("nextQuestion").textContent=quizFinished?"Пройти заново":(quizIndex===quizQuestions.length-1?"Завершить тест":"Следующий вопрос");
+  if(quizFinished){renderResult();return;}
+  card.replaceChildren();
+  const n=document.createElement("div");n.className="quiz-number";n.textContent="ВОПРОС "+String(quizIndex+1).padStart(2,"0");
+  const q=document.createElement("div");q.className="quiz-question";q.textContent=item.q;
+  card.append(n,q);
+  item.o.forEach((label,i)=>{
+    const option=document.createElement("label");option.className="option";
+    const input=document.createElement("input");input.type=item.multi?"checkbox":"radio";input.name="quiz-option";input.value=i;
+    input.checked=item.multi?Array.isArray(quizAnswers[quizIndex])&&quizAnswers[quizIndex].includes(i):quizAnswers[quizIndex]===i;
+    input.addEventListener("change",()=>{
+      if(item.multi){let selected=Array.isArray(quizAnswers[quizIndex])?[...quizAnswers[quizIndex]]:[];if(input.checked&&!selected.includes(i))selected.push(i);if(!input.checked)selected=selected.filter(x=>x!==i);quizAnswers[quizIndex]=selected;}
+      else quizAnswers[quizIndex]=i;
+    });
+    const text=document.createElement("span");text.textContent=String.fromCharCode(65+i)+". "+label;
+    option.append(input,text);card.append(option);
+  });
+  document.getElementById("quizResult").hidden=true;
+}
+function finishQuiz(){quizFinished=true;renderQuiz();}
+function renderResult(){
+  const result=document.getElementById("quizResult");result.hidden=false;result.replaceChildren();
+  const score=quizQuestions.reduce((sum,item,i)=>{
+    const answer=quizAnswers[i];
+    const correct=item.multi?Array.isArray(answer)&&answer.length===item.a.length&&item.a.every(x=>answer.includes(x)):answer===item.a;
+    return sum+(correct?1:0);
+  },0);
+  const heading=document.createElement("h2");heading.textContent="Результат";
+  const points=document.createElement("div");points.className="result-score";points.textContent=score+" / "+quizQuestions.length;
+  const desc=document.createElement("p");desc.className="muted";desc.textContent="Правильных ответов: "+score+" из "+quizQuestions.length+". Разбор ниже.";
+  result.append(heading,points,desc);
+  quizQuestions.forEach((item,i)=>{
+    const answer=quizAnswers[i], correct=item.multi?Array.isArray(answer)&&answer.length===item.a.length&&item.a.every(x=>answer.includes(x)):answer===item.a;
+    const row=document.createElement("div");row.className="review";
+    const title=document.createElement("div");title.className="review-title";title.textContent=(i+1)+". "+item.q;
+    const your=document.createElement("div");your.className=correct?"review-good":"review-bad";
+    const selected=Array.isArray(answer)?answer:answer===null?[]:[answer];
+    your.textContent="Твой ответ: "+(selected.length?selected.map(x=>String.fromCharCode(65+x)+". "+item.o[x]).join("; "):"не выбран");
+    const key=document.createElement("div");key.className="muted";key.textContent="Правильный ответ: "+item.a.map?item.a.map(x=>String.fromCharCode(65+x)+". "+item.o[x]).join("; "):String.fromCharCode(65+item.a)+". "+item.o[item.a];
+    const explain=document.createElement("div");explain.textContent=item.e;
+    row.append(title,your,key,explain);result.append(row);
+  });
+  const again=document.createElement("button");again.className="primary";again.textContent="Пройти ещё раз";again.style.marginTop="16px";again.addEventListener("click",restartQuiz);result.append(again);
+}
+function restartQuiz(){quizIndex=0;quizAnswers=Array(quizQuestions.length).fill(null);quizFinished=false;renderQuiz();}
+document.getElementById("restartQuiz").addEventListener("click",restartQuiz);
+document.getElementById("prevQuestion").addEventListener("click",()=>{if(quizIndex>0&&!quizFinished){quizIndex--;renderQuiz();}});
+document.getElementById("nextQuestion").addEventListener("click",()=>{
+  if(quizFinished){restartQuiz();return;}
+  if(quizIndex<quizQuestions.length-1){quizIndex++;renderQuiz();}
+  else finishQuiz();
+});
 
 const query = document.getElementById("q");
 const category = document.getElementById("category");
