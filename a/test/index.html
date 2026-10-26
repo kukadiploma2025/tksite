@@ -138,7 +138,8 @@ function renderQuiz(){
   document.getElementById("quizResult").hidden=!quizFinished;
   document.getElementById("prevQuestion").disabled=quizIndex===0||quizFinished;
   document.getElementById("nextQuestion").textContent=quizFinished?"Пройти заново":(quizIndex===quizQuestions.length-1?"Завершить тест":"Следующий вопрос");
-  if(quizFinished){renderResult();return;}
+  if(quizFinished){card.replaceChildren();document.getElementById("prevQuestion").hidden=true;document.getElementById("nextQuestion").hidden=true;renderResult();return;}
+  document.getElementById("prevQuestion").hidden=false;document.getElementById("nextQuestion").hidden=false;
   card.replaceChildren();
   const n=document.createElement("div");n.className="quiz-number";n.textContent="ВОПРОС "+String(quizIndex+1).padStart(2,"0");
   const q=document.createElement("div");q.className="quiz-question";q.textContent=item.q;
@@ -175,7 +176,7 @@ function renderResult(){
     const your=document.createElement("div");your.className=correct?"review-good":"review-bad";
     const selected=Array.isArray(answer)?answer:answer===null?[]:[answer];
     your.textContent="Твой ответ: "+(selected.length?selected.map(x=>String.fromCharCode(65+x)+". "+item.o[x]).join("; "):"не выбран");
-    const key=document.createElement("div");key.className="muted";key.textContent="Правильный ответ: "+item.a.map?item.a.map(x=>String.fromCharCode(65+x)+". "+item.o[x]).join("; "):String.fromCharCode(65+item.a)+". "+item.o[item.a];
+    const key=document.createElement("div");key.className="muted";key.textContent="Правильный ответ: "+(Array.isArray(item.a)?item.a.map(x=>String.fromCharCode(65+x)+". "+item.o[x]).join("; "):String.fromCharCode(65+item.a)+". "+item.o[item.a]);
     const explain=document.createElement("div");explain.textContent=item.e;
     row.append(title,your,key,explain);result.append(row);
   });
