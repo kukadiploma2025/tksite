@@ -21,7 +21,7 @@ kbd{font-size:11px;color:var(--muted);border:1px solid var(--line);padding:3px 6
 .results-head{display:flex;align-items:center;justify-content:space-between;margin:24px 0 12px}.results-head h2{font-size:14px;margin:0}.count{color:var(--muted);font-size:12px}
 .results{display:grid;gap:9px}.result{display:block;width:100%;text-align:left;background:var(--panel);color:var(--text);border:1px solid var(--line);border-radius:11px;padding:16px;cursor:pointer;font:inherit;transition:border-color .15s,transform .15s}.result:hover,.result:focus-visible{border-color:var(--accent);outline:none;transform:translateY(-1px)}
 .q{font-weight:700}.q mark{background:transparent;color:var(--accent)}.meta{color:var(--muted);font-size:12px;margin-top:5px}
-.answer{display:none;margin-top:12px;padding-top:12px;border-top:1px solid var(--line);color:#dce1e7;font-size:14px;white-space:pre-wrap}.result.open .answer{display:block}.answer-label{color:var(--accent);font-size:11px;text-transform:uppercase;letter-spacing:1px;font-weight:800;display:block;margin-bottom:5px}
+.answer{display:block;margin-top:12px;padding-top:12px;border-top:1px solid var(--line);color:#dce1e7;font-size:14px;white-space:pre-wrap}.answer-label{color:var(--accent);font-size:11px;text-transform:uppercase;letter-spacing:1px;font-weight:800;display:block;margin-bottom:5px}
 .empty{border:1px dashed #343a44;border-radius:12px;padding:24px;text-align:center;color:var(--muted);font-size:14px}.empty strong{display:block;color:var(--text);margin-bottom:5px}
 footer{border-top:1px solid var(--line);padding:22px 0;color:var(--muted);font-size:12px}.foot{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 @media(max-width:520px){main{padding-top:50px}.tag{font-size:10px}.hint kbd{display:none}.searchline{padding:0 12px}input{padding:16px 0}}
@@ -98,19 +98,18 @@ function render(){
  hintCount.textContent=term?'Найдено: '+found.length:'Начни вводить текст';
  if(!found.length){results.innerHTML='<div class="empty"><strong>Ничего не найдено</strong>Попробуй ввести первые слова по-другому. Новые вопросы можно добавить в базу сайта.</div>';return}
  found.forEach(item=>{
-   const card=document.createElement('button');card.type='button';card.className='result';
+   const card=document.createElement('article');card.className='result';
    const q=document.createElement('div');q.className='q';q.textContent=item.q;
-   const meta=document.createElement('div');meta.className='meta';meta.textContent=item.topic+' · Нажми, чтобы открыть ответ';
+   const meta=document.createElement('div');meta.className='meta';meta.textContent=item.topic;
    const answer=document.createElement('div');answer.className='answer';
    const label=document.createElement('span');label.className='answer-label';label.textContent='Ответ';
    const body=document.createElement('span');body.textContent=item.a;
    answer.append(label,body);card.append(q,meta,answer);
-   card.addEventListener('click',()=>{const open=card.classList.toggle('open');meta.textContent=open?item.topic+' · Нажми, чтобы скрыть ответ':item.topic+' · Нажми, чтобы открыть ответ'});
    results.appendChild(card);
  });
 }
 search.addEventListener('input',render);
-search.addEventListener('keydown',e=>{if(e.key==='Escape'){search.value='';render();search.blur()}if(e.key==='ArrowDown'){const first=results.querySelector('button');if(first)first.focus()}});
+search.addEventListener('keydown',e=>{if(e.key==='Escape'){search.value='';render();search.blur()}if(e.key==='ArrowDown'){const first=results.querySelector('.result');if(first)first.scrollIntoView({block:'nearest'})}});
 document.getElementById('year').textContent=new Date().getFullYear();
 render();
 </script>
