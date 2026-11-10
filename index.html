@@ -1,0 +1,417 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>KUKANDRIO — Куаныш Тлепберген</title>
+<link rel="icon" type="image/png" href="kukandrio.png">
+<link rel="apple-touch-icon" href="kukandrio.png">
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Куаныш Тлепберген — KUKANDRIO. Блогер из Астаны, автор опросов, экспериментов и развлекательного контента.">
+<meta name="theme-color" content="#09112B">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700&family=Unbounded:wght@500;700;900&display=swap" rel="stylesheet">
+<style>
+/* Layout: street-interview energy. Giant gold greeting, a ticker band of formats, then big editorial rows. Single committed dark look (Astana night + flag sky + gold). */
+:root{
+  color-scheme:dark;
+  --bg:#09112B;
+  --bg2:#0F1A3D;
+  --ink:#EEF2FF;
+  --mute:#9AA8D0;
+  --line:#243468;
+  --sky:#22B8E8;
+  --gold:#FFC93C;
+  --gold-ink:#1A1400;
+  --display:'Unbounded','Arial Black',Impact,sans-serif;
+  --body:'Manrope',system-ui,-apple-system,'Segoe UI',sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.6 var(--body);-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--bg);z-index:30}
+a{color:inherit}
+.wrap{max-width:1160px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+:focus-visible{outline:3px solid var(--gold);outline-offset:3px;border-radius:6px}
+
+/* header */
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:rgba(9,17,43,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.bar{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:12px}
+.brand{font:900 1.05rem var(--display);letter-spacing:.02em;text-decoration:none}
+.brand span{color:var(--gold)}
+nav{display:flex;gap:22px;align-items:center}
+nav a{font-size:.92rem;font-weight:500;color:var(--mute);text-decoration:none}
+nav a:hover{color:var(--ink)}
+.pill{display:inline-flex;align-items:center;gap:8px;font:700 .95rem var(--body);text-decoration:none;padding:12px 22px;border-radius:999px;border:2px solid var(--gold);transition:transform .15s}
+.pill:hover{transform:translateY(-2px)}
+.pill.solid{background:var(--gold);color:var(--gold-ink)}
+.pill.ghost{color:var(--ink);border-color:var(--line)}
+.pill.ghost:hover{border-color:var(--sky)}
+nav .pill{padding:8px 16px;font-size:.88rem;color:var(--gold-ink)}
+@media(max-width:820px){nav a:not(.pill){display:none}}
+
+/* hero */
+.hero{padding-block:clamp(40px,7vw,88px) clamp(32px,5vw,56px)}
+.eyebrow{font:700 .78rem var(--body);letter-spacing:.16em;text-transform:uppercase;color:var(--sky);margin:0 0 18px}
+h1{margin:0;font:900 clamp(2.2rem,11vw,8rem)/1.02 var(--display);letter-spacing:-.02em;overflow-wrap:anywhere;text-wrap:balance}
+h1 em{font-style:normal;color:var(--gold)}
+.hero-row{display:grid;grid-template-columns:1.25fr .75fr;gap:clamp(24px,5vw,64px);align-items:center;margin-top:clamp(28px,4vw,48px)}
+.hero-row>*{min-width:0}
+.lead{font-size:clamp(1.1rem,2.1vw,1.4rem);line-height:1.5;max-width:30em;margin:0 0 28px}
+.cta{display:flex;flex-wrap:wrap;gap:12px}
+.portrait{position:relative;aspect-ratio:4/5;max-width:340px;width:100%;margin-left:auto;border-radius:28px;background:linear-gradient(160deg,var(--sky) 0%,#1B5FD6 55%,#10286E 100%);overflow:hidden;display:grid;place-items:center;transform:rotate(2.5deg)}
+.portrait .mono{font:900 9rem/1 var(--display);color:rgba(255,255,255,.92)}
+.portrait img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.tag{position:absolute;left:14px;bottom:14px;background:var(--gold);color:var(--gold-ink);font:700 .85rem var(--body);padding:8px 14px;border-radius:999px;z-index:2}
+.wave{display:flex;align-items:center;gap:5px;height:56px;margin-top:36px}
+.wave i{flex:1;max-width:8px;border-radius:4px;background:var(--sky);height:var(--h);animation:pulse 1.6s ease-in-out infinite;animation-delay:var(--d)}
+@keyframes pulse{0%,100%{transform:scaleY(.35)}50%{transform:scaleY(1)}}
+@media(max-width:760px){.hero-row{grid-template-columns:1fr}.portrait{margin:8px auto 0;max-width:260px}.portrait .mono{font-size:7rem}}
+
+/* ticker */
+.ticker{background:var(--gold);color:var(--gold-ink);overflow:hidden;border-block:3px solid var(--gold-ink)}
+.track{display:flex;width:max-content;animation:slide 32s linear infinite}
+.track span{font:900 clamp(1rem,2.4vw,1.5rem) var(--display);text-transform:uppercase;padding:16px 28px;white-space:nowrap}
+.track span::after{content:"✦";margin-left:56px}
+@keyframes slide{to{transform:translateX(-50%)}}
+
+/* sections */
+section{padding-block:clamp(56px,9vw,112px)}
+.sec-head{display:grid;grid-template-columns:200px 1fr;gap:24px;margin-bottom:40px}
+.sec-head>*{min-width:0}
+.label{font:700 .78rem var(--body);letter-spacing:.16em;text-transform:uppercase;color:var(--sky);padding-top:14px}
+h2{margin:0;font:700 clamp(1.6rem,4.4vw,3.2rem)/1.1 var(--display);letter-spacing:-.015em;text-wrap:balance}
+@media(max-width:760px){.sec-head{grid-template-columns:1fr;gap:8px}.label{padding-top:0}}
+
+/* about */
+.about{display:grid;grid-template-columns:200px 1fr;gap:24px}
+.about>*{min-width:0}
+.about p{font-size:1.2rem;max-width:36em;margin:0 0 24px}
+.facts{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--line)}
+.facts div{padding:18px 20px 0 0}
+.facts dt{font:700 .75rem var(--body);letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
+.facts dd{margin:4px 0 0;font:500 1.05rem var(--body)}
+@media(max-width:760px){.about{grid-template-columns:1fr;gap:8px}.facts{grid-template-columns:1fr}}
+
+/* formats */
+.formats{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.fmt{background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:28px;display:flex;flex-direction:column;gap:14px;min-width:0}
+.fmt h3{margin:0;font:700 1.6rem var(--display)}
+.fmt p{margin:0;color:var(--mute)}
+.fmt:nth-child(1){background:var(--sky);border-color:var(--sky);color:#04122B}
+.fmt:nth-child(1) p{color:#0A2A55}
+.fmt:nth-child(2){background:var(--gold);border-color:var(--gold);color:var(--gold-ink)}
+.fmt:nth-child(2) p{color:#3A2E00}
+.fmt .big{font:900 4rem/1 var(--display);opacity:.9}
+@media(max-width:860px){.formats{grid-template-columns:1fr}}
+
+/* poll */
+.pollbox{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,5vw,64px);align-items:center}
+.pollbox>*{min-width:0}
+.pollbox .txt p{color:var(--mute);max-width:26em}
+.bubble{background:var(--ink);color:#0B1330;border-radius:28px 28px 28px 6px;padding:28px}
+.bubble .q{font:700 1.3rem/1.3 var(--display);margin:0 0 20px}
+.opts{display:grid;gap:10px;margin:0;padding:0;border:0}
+.opt{font:700 1rem var(--body);text-align:left;background:#fff;color:#0B1330;border:2px solid #C9D4F5;border-radius:14px;padding:14px 16px;cursor:pointer;display:flex;justify-content:space-between;gap:12px;transition:transform .12s,border-color .12s}
+.opt:hover{border-color:var(--sky);transform:translateX(4px)}
+.opt[aria-pressed="true"]{background:var(--gold);border-color:#1A1400}
+.opt .mark{opacity:0}
+.opt[aria-pressed="true"] .mark{opacity:1}
+.after{margin:16px 0 0;font-size:.95rem;min-height:1.5em}
+.after a{font-weight:700}
+@media(max-width:760px){.pollbox{grid-template-columns:1fr}}
+
+/* projects */
+.rows{border-top:1px solid var(--line)}
+.row{display:grid;grid-template-columns:1fr 1.2fr auto;gap:24px;align-items:center;padding:28px 0;border-bottom:1px solid var(--line);text-decoration:none}
+.row>*{min-width:0}
+.row h3{margin:0;font:700 clamp(1.3rem,3vw,2rem) var(--display)}
+.row p{margin:0;color:var(--mute)}
+.row .go{font:700 .95rem var(--body);color:var(--gold);white-space:nowrap}
+a.row:hover h3{color:var(--gold)}
+.row.dim .go{color:var(--mute)}
+@media(max-width:760px){.row{grid-template-columns:1fr;gap:8px}}
+
+/* shop */
+.shop{background:repeating-linear-gradient(135deg,var(--bg2) 0 18px,#0C1634 18px 36px);border:2px dashed var(--line);border-radius:28px;padding:clamp(28px,5vw,56px);display:grid;gap:16px;justify-items:start}
+.shop h3{margin:0;font:900 clamp(2.4rem,8vw,5rem)/1 var(--display);color:var(--gold)}
+.shop p{margin:0;max-width:34em;color:var(--mute)}
+
+/* contact */
+.contact{background:var(--gold);color:var(--gold-ink);border-radius:32px;padding:clamp(28px,6vw,72px)}
+.contact h2{font-size:clamp(2rem,6.4vw,4.6rem);margin-bottom:16px}
+.contact p{font-size:1.15rem;max-width:34em;margin:0 0 24px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 32px;padding:0;list-style:none}
+.chips li{border:2px solid var(--gold-ink);border-radius:999px;padding:6px 16px;font-weight:700;font-size:.95rem}
+.mailrow{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin-bottom:20px}
+.mail{font:700 clamp(1.1rem,3vw,1.7rem) var(--display);user-select:all;overflow-wrap:anywhere}
+.copy{font:700 .9rem var(--body);background:var(--gold-ink);color:var(--gold);border:0;border-radius:999px;padding:10px 18px;cursor:pointer}
+.links{display:flex;flex-wrap:wrap;gap:12px}
+.links a{font-weight:700;text-decoration-thickness:2px;text-underline-offset:4px}
+
+/* takedown form */
+.takedown{display:grid;grid-template-columns:1fr 1.3fr;gap:clamp(24px,5vw,64px);align-items:start}
+.takedown>*{min-width:0}
+.takedown .txt p{color:var(--mute);max-width:26em;margin:0 0 14px}
+.form{background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:clamp(20px,4vw,36px);display:grid;gap:18px}
+.field{display:grid;gap:6px}
+.field label{font:700 .8rem var(--body);letter-spacing:.1em;text-transform:uppercase;color:var(--mute)}
+.field input,.field select,.field textarea{font:500 1rem var(--body);color:var(--ink);background:var(--bg);border:2px solid var(--line);border-radius:12px;padding:12px 14px;width:100%}
+.field textarea{min-height:120px;resize:vertical}
+.field input::placeholder,.field textarea::placeholder{color:#5F6E9C}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--sky)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.two>*{min-width:0}
+.check{display:flex;gap:12px;align-items:flex-start;font-size:.95rem;color:var(--mute)}
+.check input{margin-top:4px;width:20px;height:20px;accent-color:var(--gold);flex:none}
+.result{background:var(--bg);border:2px solid var(--gold);border-radius:16px;padding:18px;display:grid;gap:12px}
+.result p{margin:0;font-size:.95rem}
+.result textarea{font:500 .9rem/1.5 var(--body);color:var(--ink);background:var(--bg2);border:1px solid var(--line);border-radius:10px;padding:12px;min-height:170px;width:100%;resize:vertical}
+.result .acts{display:flex;flex-wrap:wrap;gap:10px}
+.result .pill{padding:10px 18px;font-size:.9rem;cursor:pointer;font-family:var(--body)}
+@media(max-width:860px){.takedown{grid-template-columns:1fr}}
+@media(max-width:520px){.two{grid-template-columns:1fr}}
+
+footer{padding-block:36px 48px;color:var(--mute);font-size:.9rem}
+.foot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
+.foot a{text-decoration:none}
+.foot a:hover{color:var(--ink)}
+
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .track,.wave i{animation:none}
+  .pill,.opt{transition:none}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap bar">
+    <a class="brand" href="#top">KUK<span>ANDRIO</span></a>
+    <nav aria-label="Разделы">
+      <a href="#about">Обо мне</a>
+      <a href="#content">Контент</a>
+      <a href="#projects">Проекты</a>
+      <a href="https://kukandrio.kz/news/">Новости</a>
+      <a href="#shop">Магазин</a>
+      <a class="pill solid" href="#contact">Сотрудничество</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <div class="wrap hero">
+    <p class="eyebrow">Блогер · Астана, Казахстан</p>
+    <h1>KUK<em>ANDRIO</em></h1>
+    <div class="hero-row">
+      <div>
+        <p class="lead">Опросы, эксперименты, люди и жизнь без сценария.</p>
+        <div class="cta">
+          <a class="pill solid" href="https://www.instagram.com/kukandrio/" target="_blank" rel="noopener">Мой Instagram ↗</a>
+          <a class="pill ghost" href="https://www.tiktok.com/@kukandrio_" target="_blank" rel="noopener">TikTok ↗</a>
+        </div>
+        <div class="wave" aria-hidden="true" id="wave"></div>
+      </div>
+      <div class="portrait">
+        <span class="mono" aria-hidden="true">K</span>
+        <img src="kukandrio-2.png" alt="Куаныш Тлепберген, KUKANDRIO" onerror="this.remove()">
+        <span class="tag">@kukandrio</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="ticker" aria-hidden="true">
+    <div class="track" id="track"></div>
+  </div>
+
+  <section id="about">
+    <div class="wrap about">
+      <div class="label">Обо мне</div>
+      <div>
+        <h2 style="margin-bottom:28px">Кто такой KUKANDRIO?</h2>
+        <p>Куаныш Тлепберген — блогер из Астаны, Казахстан. Создаю контент о людях, обществе и повседневной жизни. Мне интересны честные ответы, неожиданные реакции и темы, которые хочется обсуждать.</p>
+        <dl class="facts">
+          <div><dt>Имя</dt><dd>Куаныш Тлепберген</dd></div>
+          <div><dt>Псевдоним</dt><dd>KUKANDRIO / Кукандрио</dd></div>
+          <div><dt>Город</dt><dd>Астана, Казахстан</dd></div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <section id="content" style="padding-top:0">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="label">Контент</div>
+        <h2>Что я снимаю?</h2>
+      </div>
+      <div class="formats">
+        <article class="fmt">
+          <div class="big" aria-hidden="true">?</div>
+          <h3>Опросы</h3>
+          <p>Мнения жителей, острые темы и неожиданные ответы на вопросы, которые волнуют общество.</p>
+        </article>
+        <article class="fmt">
+          <div class="big" aria-hidden="true">!</div>
+          <h3>Эксперименты</h3>
+          <p>Социальные эксперименты и наблюдения за тем, как люди ведут себя в разных ситуациях.</p>
+        </article>
+        <article class="fmt">
+          <div class="big" aria-hidden="true">★</div>
+          <h3>Лайфстайл</h3>
+          <p>Моя жизнь, новые идеи, проекты и события из Астаны и не только.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding-top:0">
+    <div class="wrap pollbox">
+      <div class="txt">
+        <p class="eyebrow">Попробуй сам</p>
+        <h2 style="margin-bottom:16px">Твой голос в эфире</h2>
+        <p>Так выглядит мой формат: один вопрос и честный ответ. Выбери вариант, настоящие городские опросы смотри в Instagram.</p>
+      </div>
+      <div class="bubble">
+        <p class="q" id="pollq">Что в Астане раздражает сильнее всего?</p>
+        <fieldset class="opts" style="border:0;padding:0;margin:0" aria-labelledby="pollq">
+          <button class="opt" type="button" aria-pressed="false" data-r="Зимняя погода, понимаю."><span>Мороз и ветер</span><span class="mark">✓</span></button>
+          <button class="opt" type="button" aria-pressed="false" data-r="Пробки. Классика столицы."><span>Пробки</span><span class="mark">✓</span></button>
+          <button class="opt" type="button" aria-pressed="false" data-r="Аренда кусается, согласен."><span>Цены на аренду</span><span class="mark">✓</span></button>
+          <button class="opt" type="button" aria-pressed="false" data-r="Ничего. Редкий оптимист."><span>Ничего, всё круто</span><span class="mark">✓</span></button>
+        </fieldset>
+        <p class="after" id="after" aria-live="polite">Нажми на ответ.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects" style="padding-top:0">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="label">Проекты</div>
+        <h2>Мои проекты</h2>
+      </div>
+      <div class="rows">
+        <a class="row" href="https://www.instagram.com/golosa.astany/" target="_blank" rel="noopener">
+          <h3>Голоса Астаны</h3>
+          <p>Городские опросы, новости и мнения жителей столицы.</p>
+          <span class="go">Смотреть проект ↗</span>
+        </a>
+        <a class="row" href="https://www.instagram.com/kukandrio/" target="_blank" rel="noopener">
+          <h3>KUKANDRIO</h3>
+          <p>Личный блог, авторские видео и контент в социальных сетях.</p>
+          <span class="go">Перейти в профиль ↗</span>
+        </a>
+        <div class="row dim">
+          <h3>Новые идеи</h3>
+          <p>Развиваю цифровые проекты и ищу интересные форматы для будущего контента.</p>
+          <span class="go">В разработке</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="shop" style="padding-top:0">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="label">Магазин</div>
+        <h2>Мой магазин</h2>
+      </div>
+      <div class="shop">
+        <h3>Скоро</h3>
+        <p>Раздел для будущих товаров, мерча и специальных предложений от KUKANDRIO. Готовлю новые идеи. Следи за обновлениями в моих социальных сетях.</p>
+        <a class="pill solid" href="https://www.instagram.com/kukandrio/" target="_blank" rel="noopener">Следить за обновлениями ↗</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="takedown" style="padding-top:0">
+    <div class="wrap takedown">
+      <div class="txt">
+        <p class="eyebrow">Удаление материала</p>
+        <h2 style="margin-bottom:16px">Нужно удалить материал?</h2>
+        <p>Если в моём видео или посте есть ваше лицо, голос, личные данные или ваш авторский материал, напишите мне в Telegram. Я рассмотрю обращение.</p>
+        <p>Укажите точную ссылку на материал и объясните, что именно нужно убрать.</p>
+      </div>
+      <div>
+        <div class="form">
+          <p style="margin:0;color:var(--mute)">Напишите мне в Telegram и пришлите:</p>
+          <ul style="margin:0;padding-left:1.2em;color:var(--mute);display:grid;gap:6px">
+            <li>ссылку на материал;</li>
+            <li>что именно нужно удалить и почему;</li>
+            <li>как с вами связаться, если не в Telegram.</li>
+          </ul>
+          <a class="pill solid" id="tglink" href="https://t.me/TG_USERNAME" target="_blank" rel="noopener" style="justify-self:start">Написать в Telegram ↗</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" style="padding-top:0">
+    <div class="wrap">
+      <div class="contact">
+        <h2>Есть идея? Обсудим.</h2>
+        <p>Открыт к сотрудничеству. Пиши, если хочешь сделать что-то вместе.</p>
+        <ul class="chips">
+          <li>Рекламные интеграции</li>
+          <li>Съёмки</li>
+          <li>Мероприятия</li>
+          <li>Совместные проекты</li>
+        </ul>
+        <div class="mailrow">
+          <a class="mail" href="mailto:kukandrio@gmail.com" id="mail">kukandrio@gmail.com</a>
+          <button class="copy" type="button" id="copy">Скопировать почту</button>
+        </div>
+        <div class="links">
+          <a href="https://www.instagram.com/kukandrio/" target="_blank" rel="noopener">Instagram ↗</a>
+          <a href="https://www.tiktok.com/@kukandrio_" target="_blank" rel="noopener">TikTok ↗</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <span>© 2026 KUKANDRIO. Все права защищены.</span>
+    <span><a href="mailto:kukandrio@gmail.com">Контакты</a> · <a href="#takedown">Удаление материала</a> · <a href="https://www.instagram.com/kukandrio/" target="_blank" rel="noopener">Instagram</a></span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  // sound-wave bars
+  var wave=document.getElementById('wave'),hs=[40,70,35,90,55,100,45,75,30,85,60,95,40,70,50,80,35,90,55,65,30,75,45,60];
+  hs.forEach(function(h,i){var b=document.createElement('i');b.style.setProperty('--h',h+'%');b.style.setProperty('--d',(i*0.09)+'s');wave.appendChild(b)});
+
+  // ticker
+  var words=['Опросы','Эксперименты','Люди','Астана','Лайфстайл','Без сценария','Голоса Астаны'];
+  var track=document.getElementById('track'),html='';
+  for(var k=0;k<2;k++){words.forEach(function(w){html+='<span>'+w+'</span>'})}
+  track.innerHTML=html;
+
+  // poll
+  var opts=document.querySelectorAll('.opt'),after=document.getElementById('after');
+  opts.forEach(function(o){
+    o.addEventListener('click',function(){
+      opts.forEach(function(x){x.setAttribute('aria-pressed','false')});
+      o.setAttribute('aria-pressed','true');
+      after.innerHTML=o.getAttribute('data-r')+' Больше опросов — <a href="https://www.instagram.com/golosa.astany/" target="_blank" rel="noopener">Голоса Астаны ↗</a>';
+    });
+  });
+
+  // copy email
+  var btn=document.getElementById('copy'),mail=document.getElementById('mail');
+  btn.addEventListener('click',function(){
+    function done(){btn.textContent='Скопировано';setTimeout(function(){btn.textContent='Скопировать почту'},2000)}
+    function fallback(){var r=document.createRange();r.selectNodeContents(mail);var s=window.getSelection();s.removeAllRanges();s.addRange(r);btn.textContent='Выделено, нажми копировать'}
+    try{navigator.clipboard.writeText('kukandrio@gmail.com').then(done,fallback)}catch(e){fallback()}
+  });
+
+})();
+</script>
+
+</body>
+</html>
